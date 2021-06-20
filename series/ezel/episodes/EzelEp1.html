@@ -29,7 +29,8 @@
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="../../../index.html">Home</a></li>
                         <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="../../../series.html">Series</a></li>
-                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="../../../#contact">Support</a></li>
+                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="../../../support.html">Support</a></li>
+                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="../../../help.html">Help</a></li>
                     </ul>
                 </div>
             </div>
@@ -51,13 +52,79 @@
                     <div class="divider-custom-line"></div>
                 </div>
                 <h2 class="page-section-heading text-center text-uppercase text-secondary mb-0">Episode 1</h2>
+                <br>
                 <!-- Portfolio Grid Items-->
-                <div class="row justify-content-center">
-                    <div>
-                        </div>  
-                        <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/FSo8aRocl9w" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+               
+                    <!-- Portfolio Item 1-->
+                    <div id="fullscreen-container" style="width: 100%; height: 400px;">
+                        <iframe id="video" width="100%" height="100%" src="https://www.youtube-nocookie.com/embed/FSo8aRocl9w" frameborder="0" allowfullscreen="true"></iframe>
+                      </div>
+                      <script src="../../../vendor/youtube.external.subtitle/youtube.external.subtitle.js"></script>
+                      <script src="../../../vendor/subtitles-parser/subtitles.parser.js"></script>
+                      <button id="fullscreen-btn">Fullscreen</button>
+                      <style>
+                        .youtube-external-subtitle span { background: black; }
+                        .youtube-external-subtitle.fullscreen span { background: black; }
+                      </style>
+                      <script>
+                        var loadSRT = function(url, callback) {
+                          var httpRequest = new XMLHttpRequest();
+                      
+                          httpRequest.onreadystatechange = function() {
+                            if (httpRequest.readyState === XMLHttpRequest.DONE) {
+                              var subtitles = parser.fromSrt(httpRequest.responseText, true);
+                      
+                              for (var i in subtitles) {
+                                subtitles[i] = {
+                                  start : subtitles[i].startTime / 1000,
+                                  end   : subtitles[i].endTime / 1000,
+                                  text  : subtitles[i].text
+                                };
+                              }
+                      
+                              callback(subtitles);
+                            }
+                          };
+                      
+                          httpRequest.open('GET', url, true);
+                          httpRequest.send(null);
+                        };
+                      
+                        loadSRT('NAY', function(subtitles) {
+                          var youtubeExternalSubtitle = new YoutubeExternalSubtitle.Subtitle(document.getElementById('video'), subtitles);
+                        });
+                      
+                        document.getElementById('fullscreen-btn').addEventListener('click', function(e) {
+                          var elem = document.getElementById('fullscreen-container');
+                      
+                          var openFullscreen = function() {
+                            if (elem.requestFullscreen) {
+                              elem.requestFullscreen();
+                            } else if (elem.mozRequestFullScreen) { /* Firefox */
+                              elem.mozRequestFullScreen();
+                            } else if (elem.webkitRequestFullscreen) { /* Chrome, Safari & Opera */
+                              elem.webkitRequestFullscreen();
+                            } else if (elem.msRequestFullscreen) { /* IE/Edge */
+                              elem.msRequestFullscreen();
+                            }
+                          };
+                      
+                          openFullscreen();
+                        });
+                      </script>
                     </div>
                 </div>
+                <div class="divider-custom">
+                  <div class="divider-custom-line"></div>
+                  <div class="divider-custom-icon"><i class="fas fa-star"></i></div>
+                  <div class="divider-custom-line"></div>
+              </div>
+              <center><h1 style="color:black;font-size:25px;">Translated by:</h1></center>
+                <!-- begin wwww.htmlcommentbox.com -->
+                <div id="HCB_comment_box"><a href="http://www.htmlcommentbox.com">Widget</a> is loading comments...</div>
+                <link rel="stylesheet" type="text/css" href="https://www.htmlcommentbox.com/static/skins/bootstrap/twitter-bootstrap.css?v=0" />
+                <script type="text/javascript" id="hcb"> /*<!--*/ if(!window.hcb_user){hcb_user={};} (function(){var s=document.createElement("script"), l=hcb_user.PAGE || (""+window.location).replace(/'/g,"%27"), h="https://www.htmlcommentbox.com";s.setAttribute("type","text/javascript");s.setAttribute("src", h+"/jread?page="+encodeURIComponent(l).replace("+","%2B")+"&mod=%241%24wq1rdBcg%240jhTEphkCWIOyt4iEQz7Q0"+"&opts=16862&num=10&ts=1624221755724");if (typeof s!="undefined") document.getElementsByTagName("head")[0].appendChild(s);})(); /*-->*/ </script>
+                <!-- end www.htmlcommentbox.com -->
             </div>
         </section>
         <!-- Copyright Section-->
